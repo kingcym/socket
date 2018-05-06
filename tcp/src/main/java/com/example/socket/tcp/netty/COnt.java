@@ -5,6 +5,7 @@ import io.netty.channel.socket.SocketChannel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.Map;
 
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * @Description:
  * @Date: 2018/5/6 17:28
  */
-@RestController
+//@RestController
 public class COnt {
     private static final NettyServer instance = NettyServer.getInstance();
     private static final  NettyClient instance1 = NettyClient.getInstance();
@@ -30,7 +31,7 @@ public class COnt {
 
 
     @GetMapping("/dd1")
-    public void aVoid1() throws InterruptedException {
+    public void aVoid1() throws InterruptedException, IOException {
         Map<String , SocketChannel> map = NettyChannelMap.map();
         System.out.println(map.size());
         for(Map.Entry<String,SocketChannel > entry:map.entrySet()){
@@ -42,5 +43,11 @@ public class COnt {
 
 
 
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Process process = Runtime.getRuntime().exec("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
+        process.waitFor();
+        process.destroy();
     }
 }
